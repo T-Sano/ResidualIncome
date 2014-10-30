@@ -1,0 +1,174 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>パートでの手取り収入を計算</title>
+		<link rel="stylesheet" type="text/css" href="../css/popup.css">
+		<script type="text/javascript" src="../js/jquery-2.0.3.js"></script>
+		<script type="text/javascript" src="../js/popup.js"></script>
+	</head>
+	<body>
+		<section id="header">
+			<div class="float_left common_header_style"><p class="htext">パート収入</p><div id="hincome" class="hamount"></div><span class="htext2">万円</span></div>
+			<div class="float_left hsymbol">-</div>
+			<div class="float_left common_header_style"><p class="htext">追加負担の合計</p><div id="hsocial" class="hamount"></div><span class="htext2">万円</span></div>
+			<div class="float_left hsymbol">=</div>
+			<div class="float_left common_header_style"><p class="htext">手取りの増加額</p><div id="hresult" class="hamount"></div><span class="htext2">万円</span></div>
+		</section>
+
+		<div class="bgi">
+			<section id="income">
+				<div id="income_head"><p id="income_head_text" class="title_style_1">パート収入</p></div>
+				<div id="income_slide" class="info_style">
+					<!-- 入力エラー表示領域 -->
+					<div id="add_attention"></div>
+					<div class="message_style_2">
+						<input type="radio" name="r1" value="m" id="income_r_1" class="income_r" checked><label for="income_r_1">月額</label>
+						<input type="radio" name="r1" value="y" id="income_r_2" class="income_r"><label for="income_r_2">年額</label>
+					</div>
+					<div class="float_left message_style_2"><input type="number" name="t1" value="0" id="income_t" min="0">万円</div><div id="income_m" class="float_left" style="display:none;">× 12ヶ月</div>
+					<div id="income_button" class="clear_left next_button_style">
+						<marquee scrolldelay="333" direction="right" scrollamount="100%" width="100%">NEXT >></marquee>
+					</div>
+				</div>
+			</section>
+
+			<section id="social" class="display_none">
+				<div id="social_head"><p id="social_head_text" class="title_style_2">社会保険</p></div>
+				<div id="social_slide" class="display_none info_style">
+					<div class="message_style">
+						当てはまる条件を選択してください。
+					</div>
+					<div class="choice_style">
+						<!-- パート収入が130万円未満であれば健康保険は0円 -->
+						<input type="checkbox" name="sc" value="sc1" id="social_c_1">
+						<label for="social_c_1">2ヶ月以内の雇用期間</label>
+					</div>
+					<div class="choice_style">
+						<input type="checkbox" name="sc" value="sc2" id="social_c_2">
+						<label for="social_c_2">1日または1週間の労働時間が正社員の概ね3/4以上</label>
+					</div>
+					<div class="choice_style">
+						<input type="checkbox" name="sc" value="sc3" id="social_c_3">
+						<label for="social_c_3">1ヶ月の労働日数が正社員の概ね3/4以上</label>
+					</div>
+					<div class="choice_style">
+						<input type="checkbox" name="sc" value="sc4" id="social_c_4">
+						<label for="social_c_4">40歳以上</label>
+					</div>
+					<div id="social_button" class="clear_left next_button_style">
+						<marquee scrolldelay="333" direction="right" scrollamount="100%" width="100%">NEXT >></marquee>
+					</div>
+				</div>
+				<div id="social_result" class="display_none info_style">
+					<div class="common_item_name">健康保険料</div>
+					<div id="social_result_1" class="common_item_value"></div>
+					<div class="float_left">万円</div>
+					<div class="clear_left"></div>
+					<div class="common_item_name">公的年金保険料</div>
+					<div id="social_result_2" class="common_item_value"></div>
+					<div class="float_left">万円</div>
+					<div class="clear_left"></div>
+				</div>
+			</section>
+
+			<section id="employment" class="display_none">
+				<div id="employment_head"><p id="employment_head_text" class="title_style_2">雇用保険</p></div>
+				<div id="employment_slide" class="display_none info_style">
+					<div class="message_style">
+						当てはまる雇用条件を選択してください。
+					</div>
+					<div class="choice_style">
+						<input type="checkbox" name="ec" value="ec1" id="employment_c_1">
+						<label for="employment_c_1">
+							1週間の所定労働時間が20時間以上
+						</label>
+					</div>
+					<div class="choice_style">
+						<input type="checkbox" name="ec" value="ec2" id="employment_c_2">
+						<label for="employment_c_2">
+							31日以上雇用される見込みあり
+						</label>
+					</div>
+					<div class="choice_style">
+						<input type="checkbox" name="ec" value="ec3" id="employment_c_3">
+						<label for="employment_c_3">
+							週40時間の労働時間で契約
+						</label>
+					</div>
+					<div id="employment_button" class="clear_left next_button_style">
+						<marquee scrolldelay="333" direction="right" scrollamount="100%" width="100%">NEXT >></marquee>
+					</div>
+				</div>
+				<div id="employment_result" class="display_none info_style">
+					<div class="common_item_name">雇用保険料</div>
+					<div id="employment_result_1" class="common_item_value"></div>
+					<div class="float_left">万円</div>
+					<div class="clear_left"></div>
+				</div>
+			</section>
+
+			<section id="mom_increase" class="display_none">
+				<div id="mom_increase_head"><p id="mom_increase_head_text" class="title_style_2">ママ増加分</p></div>
+				<div id="mom_increase_slide" class="display_none info_style">
+					<div id="mom_increase_button" class="clear_left next_button_style">
+						<marquee scrolldelay="333" direction="right" scrollamount="100%" width="100%">NEXT >></marquee>
+					</div>
+				</div>
+				<div id="mom_increase_result" class="display_none info_style">
+					<div class="common_item_name">所得税増加額</div>
+					<div id="mom_increase_result_1" class="common_item_value"></div>
+					<div class="float_left">万円</div>
+					<div class="clear_left"></div>
+
+					<div class="common_item_name">住民税増加額</div>
+					<div id="mom_increase_result_2" class="common_item_value"></div>
+					<div class="float_left">万円</div>
+					<div class="clear_left"></div>
+				</div>
+			</section>
+
+			<section id="papa_increase" class="display_none">
+				<div id="papa_increase_head"><p id="papa_increase_head_text" class="title_style_2">パパ増加分</p></div>
+				<div id="papa_increase_slide" class="display_none info_style">
+					<!-- 入力エラー表示領域 -->
+					<div id="add_attention_2"></div>
+					<div class="message_style">源泉徴収票から下記項目を入力してください。</div>
+					<div class="message_style_2">給与所得控除後の金額</div>
+					<div class="message_style_2"><input type="number" name="papat1" value="0" id="papa_increase_t_1" min="0">円</div>
+					<div class="message_style_2">所得控除の額の合計額</div>
+					<div class="message_style_2"><input type="number" name="papat2" value="0" id="papa_increase_t_2" min="0">円</div>
+					<div class="message_style" style="margin-top: 15px;">ママが働くことで影響する項目を入力してください。</div>
+					<div class="message_style_2">配偶者手当減少額</div>
+					<div class="message_style_2"><input type="number" name="papat3" value="0" id="papa_increase_t_3" min="0">万円/月</div>
+					<div class="message_style_2">その他(保育料 etc）</div>
+					<div class="message_style_2"><input type="number" name="papat4" value="0" id="papa_increase_t_4" min="0">万円/月</div>
+					<div id="papa_increase_button" class="clear_left next_button_style">
+						<marquee scrolldelay="333" direction="right" scrollamount="100%" width="100%">NEXT >></marquee>
+					</div>
+				</div>
+				<div id="papa_increase_result" class="display_none info_style">
+					<div class="common_item_name">所得税増加額</div>
+					<div id="papa_increase_result_1" class="common_item_value"></div>
+					<div class="float_left">万円</div>
+					<div class="clear_left"></div>
+
+					<div class="common_item_name">住民税増加額</div>
+					<div id="papa_increase_result_2" class="common_item_value"></div>
+					<div class="float_left">万円</div>
+					<div class="clear_left"></div>
+
+					<div class="common_item_name">配偶者手当減少額</div>
+					<div id="papa_increase_result_3" class="common_item_value"></div>
+					<div class="float_left">万円</div>
+					<div class="clear_left"></div>
+
+					<div class="common_item_name">その他(保育料 etc）</div>
+					<div id="papa_increase_result_4" class="common_item_value"></div>
+					<div class="float_left">万円</div>
+					<div class="clear_left"></div>
+				</div>
+			</section>
+		</div>
+	</body>
+</html>

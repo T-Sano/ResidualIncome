@@ -1,0 +1,23 @@
+{	
+	"name": "結局いくら？",
+	"version": "0.1",
+	"manifest_version": 2,
+	
+	"description": "パートでの収入から一家の収入が '結局いくら' 増加したのか計算します。",
+	"icons": {
+		"19": "img/icon_19.png",
+		"48": "img/icon_48.png",
+		"128": "img/icon_128.png"
+	},
+	
+	"browser_action": {
+		"default_icon": "img/icon_19.png",
+		"default_popup": "html/popup.html"
+	},
+	
+	"permissions": [
+		"tabs",
+		"http://*/*",
+		"https://*/*"
+	]
+}
